@@ -50,7 +50,7 @@ public class User {
     @UpdateTimestamp
     private Date updated;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 

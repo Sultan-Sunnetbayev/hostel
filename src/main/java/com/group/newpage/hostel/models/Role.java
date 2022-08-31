@@ -32,6 +32,6 @@ public class Role {
     @UpdateTimestamp
     private Date updated;
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private List<User>users;
 }
