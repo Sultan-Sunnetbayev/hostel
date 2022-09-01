@@ -57,6 +57,8 @@ CREATE TABLE "students_participation_notebook"(
     "student_id" INT NOT NULL,
     "participation_notebook_id" INT NOT NULL ,
     "status" BOOLEAN DEFAULT TRUE ,
+    "created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    "updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 
     CONSTRAINT "students_participation_notebook_student_id_fk"
         FOREIGN KEY ("student_id")
