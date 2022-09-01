@@ -24,7 +24,7 @@ public class ParticipationNotebook {
     private int id;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "students_participation_notebook",
+            name = "participation_notebook_students",
             joinColumns = @JoinColumn(name = "participation_notebook_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
     )

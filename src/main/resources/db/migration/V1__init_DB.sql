@@ -52,7 +52,7 @@ CREATE TABLE "participation_notebook"(
         PRIMARY KEY ("id")
 );
 
-CREATE TABLE "students_participation_notebook"(
+CREATE TABLE "participation_notebook_students"(
 
     "student_id" INT NOT NULL,
     "participation_notebook_id" INT NOT NULL ,
@@ -60,11 +60,11 @@ CREATE TABLE "students_participation_notebook"(
     "created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
     "updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 
-    CONSTRAINT "students_participation_notebook_student_id_fk"
+    CONSTRAINT "participation_notebook_students_student_id_fk"
         FOREIGN KEY ("student_id")
             REFERENCES "students"("id")
                 ON UPDATE CASCADE ON DELETE CASCADE ,
-    CONSTRAINT "students_participation_notebook_participation_notebook_id_fk"
+    CONSTRAINT "participation_notebook_students_participation_notebook_id_fk"
         FOREIGN KEY ("participation_notebook_id")
             REFERENCES "participation_notebook"("id")
                 ON UPDATE CASCADE ON DELETE CASCADE
