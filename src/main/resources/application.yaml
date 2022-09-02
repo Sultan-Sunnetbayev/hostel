@@ -18,3 +18,10 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+
+image:
+  path: /home/sultan/data/imageUsers
+path:
+  default:
+    image:
+      user: /home/sultan/data/imageUsers/image.png
