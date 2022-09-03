@@ -1,7 +1,6 @@
 package com.group.newpage.hostel.helper;
 
 import org.apache.commons.io.FileUtils;
-import org.hibernate.bytecode.internal.bytebuddy.PassThroughInterceptor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -25,8 +24,8 @@ public class FileUploadUtil {
         try (InputStream inputStream = image.getInputStream()) {
 
             Path fullPath = path.resolve(fileName);
-
             Files.copy(inputStream, fullPath, StandardCopyOption.REPLACE_EXISTING);
+
         } catch (IOException ioException) {
 
             ioException.printStackTrace();

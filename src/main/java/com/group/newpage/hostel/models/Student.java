@@ -39,9 +39,9 @@ public class Student {
     @Column(name = "training_year")
     @NotBlank(message = "training year is mandatory")
     @NotEmpty(message = "training year is empty")
-    private int trainingYear;
+    private Integer trainingYear;
     @Column(name = "hostel")
-    private boolean hostel;
+    private Boolean hostel;
     @Column(name = "created")
     @CreationTimestamp
     private Date created;

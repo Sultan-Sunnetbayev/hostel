@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
                 .name(user.getName())
                 .surname(user.getSurname())
                 .email(user.getEmail())
-                .password(user.getPassword())
+                .password(passwordEncoder.encode(user.getPassword()))
                 .role(role)
                 .build();
 
@@ -167,10 +167,20 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void removeUserById(final int userId){
 
-        if(userRepository.findUserById(userId)!=null){
+        User user=userRepository.findUserById(userId);
 
-            userRepository.deleteById(userId);
+        if(user==null){
+
+            return;
         }
+        if(user.getImagePath()!=null && !user.getImagePath().isEmpty()){
+            File image=new File(user.getImagePath());
+
+            if(image.exists()){
+                image.delete();
+            }
+        }
+        userRepository.deleteById(userId);
 
         return;
     }
