@@ -18,7 +18,6 @@ public class StudentDTO {
     private String name;
     private String surname;
     private String patronymicName;
-    private String email;
     private String imagePath;
     private Boolean hostel;
     private Integer trainingYear;
@@ -34,15 +33,13 @@ public class StudentDTO {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +
-                ", email='" + email + '\'' +
                 ", imagePath='" + imagePath + '\'' +
                 ", hostel=" + hostel +
-                ", traingYear=" + trainingYear +
+                ", trainingYear=" + trainingYear +
                 ", gender=" + gender +
                 ", status=" + status +
                 ", created=" + created +
                 ", updated=" + updated +
                 '}';
     }
-
 }
