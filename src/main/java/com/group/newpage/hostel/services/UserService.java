@@ -12,7 +12,7 @@ public interface UserService {
     @Transactional
     void addUser(User user, MultipartFile image, String roleName);
 
-    boolean isUserExists(User user);
+    boolean isUserExists(String email);
 
     @Transactional
     void editUserById(User user, MultipartFile image);
@@ -23,4 +23,6 @@ public interface UserService {
     List<UserDTO> getAllUserDTOSBesideAdmin();
 
     UserDTO getUserDTOById(int userId);
+
+    boolean isUserExistsById(int userId);
 }

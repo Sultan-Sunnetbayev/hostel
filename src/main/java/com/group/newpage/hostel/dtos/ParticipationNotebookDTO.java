@@ -14,6 +14,7 @@ import java.util.List;
 public class ParticipationNotebookDTO {
 
     private int id;
+    private String name;
     private List<StudentDTO> studentDTOS;
 
     @Override

@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void addUser(final User user, final MultipartFile image, final String roleName){
 
-        if(isUserExists(user)){
+        if(isUserExists(user.getEmail())){
 
             return;
         }
@@ -97,9 +98,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean isUserExists(User user) {
+    public boolean isUserExists(final String email) {
 
-        if(userRepository.findUserByEmail(user.getEmail())!=null){
+        if(userRepository.findUserByEmail(email)!=null){
 
             return true;
         }else{
@@ -173,6 +174,10 @@ public class UserServiceImpl implements UserService{
 
             return;
         }
+        if(Objects.equals(user.getRole().getName(),"ROLE_ADMIN")){
+
+            return;
+        }
         if(user.getImagePath()!=null && !user.getImagePath().isEmpty()){
             File image=new File(user.getImagePath());
 
@@ -220,6 +225,18 @@ public class UserServiceImpl implements UserService{
         }else{
 
             return null;
+        }
+    }
+
+    @Override
+    public boolean isUserExistsById(final int userId){
+
+        if(userRepository.findUserById(userId)!=null){
+
+            return true;
+        }else{
+
+            return false;
         }
     }
 
