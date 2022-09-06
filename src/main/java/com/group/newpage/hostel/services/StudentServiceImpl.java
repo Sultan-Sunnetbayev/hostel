@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,6 +27,11 @@ public class StudentServiceImpl implements StudentService{
     private String imagePath;
     @Value("${path.default.image.user}")
     private String pathDefaultImageUser;
+    Comparator<Student> compareById = new Comparator<Student>() {
+        public int compare(Student o1, Student o2) {
+            return o1.compareTo(o2);
+        }
+    };
 
     @Autowired
     public StudentServiceImpl(StudentRepository studentRepository) {
@@ -223,6 +230,44 @@ public class StudentServiceImpl implements StudentService{
                 .build();
 
         return studentDTO;
+    }
+
+    @Override
+    public boolean isStudentExistsById(final int studentId){
+
+        if(studentRepository.findStudentById(studentId)!=null){
+
+            return true;
+        }else{
+
+            return false;
+        }
+    }
+
+    @Override
+    public List<StudentDTO>getStudentDTOSByParameter(final Integer trainingYear, final Boolean hostel, final String search){
+
+        List<Student> students = null;
+        if(trainingYear!=null){
+            students=studentRepository.findStudentsByTrainingYear(trainingYear);
+        }
+        if(hostel!=null){
+            students.add((Student) studentRepository.findStudentByHostel(hostel));
+        }
+        if(search!=null && !search.isEmpty()){
+            students.add((Student)studentRepository.findStudentsByNameLikeOrSurnameLikeOrPatronymicNameIsNotNullAndPatronymicNameLike(
+                    search));
+        }
+        Collections.sort(students, compareById);
+        for(int i=1;i<students.size();i++){
+            if(students.get(i).getId()== students.get(i-1).getId()){
+                students.remove(i);
+            }
+        }
+
+        return students.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
 }

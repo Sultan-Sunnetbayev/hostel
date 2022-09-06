@@ -23,4 +23,8 @@ public interface StudentService {
     void removeStudentById(int studentId);
 
     List<StudentDTO> getAllStudentDTOS();
+
+    boolean isStudentExistsById(int studentId);
+
+    List<StudentDTO>getStudentDTOSByParameter(Integer trainingYear, Boolean hostel, String search);
 }

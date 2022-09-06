@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "students")
-public class Student {
+public class Student implements Comparable<Student>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,5 +51,12 @@ public class Student {
 
     @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ParticipationNotebook> participationNotebooks;
+
+
+    @Override
+    public int compareTo(Student student) {
+
+        return this.getId()<=student.getId()? -1 : 1;
+    }
 
 }

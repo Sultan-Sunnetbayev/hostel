@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
@@ -25,5 +27,16 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query("SELECT student FROM Student student WHERE student.id = :studentId")
     Student findStudentById(@Param("studentId")int studentId);
+
+    @Query("SELECT student FROM Student student WHERE student.trainingYear = :trainingYear")
+    List<Student> findStudentsByTrainingYear(@Param("trainingYear")int trainingYear);
+
+    @Query("SELECT student FROM Student student WHERE student.hostel = :hostel")
+    List<Student> findStudentByHostel(@Param("hostel")boolean hostel);
+
+    @Query("SELECT student FROM Student student WHERE LOWER(student.name) LIKE '%'+LOWER(:search)+'%' OR " +
+            "LOWER(student.surname) LIKE '%'+LOWER(:search)+'%' OR " +
+            "((student.patronymicName IS NOT NULL) AND (student.patronymicName LIKE '%'+LOWER(:search)+'%'))")
+    List<Student>findStudentsByNameLikeOrSurnameLikeOrPatronymicNameIsNotNullAndPatronymicNameLike(@Param("search")String search);
 
 }
