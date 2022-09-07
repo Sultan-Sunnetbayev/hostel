@@ -27,4 +27,6 @@ public interface StudentService {
     boolean isStudentExistsById(int studentId);
 
     List<StudentDTO>getStudentDTOSByParameter(Integer trainingYear, Boolean hostel, String search);
+
+    Student getStudentById(int studentId);
 }

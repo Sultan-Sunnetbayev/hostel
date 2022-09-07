@@ -270,4 +270,12 @@ public class StudentServiceImpl implements StudentService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Student getStudentById(final int studentId){
+
+        Student student=studentRepository.findStudentById(studentId);
+
+        return student;
+    }
+    
 }
