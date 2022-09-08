@@ -27,7 +27,7 @@ public class ParticipationNotebookController {
     }
 
     @PostMapping(path = "/add/new/participationNotebook", produces = "application/json")
-    public ResponseEntity addNewParticipationNotebook(final @RequestParam("participation") List<StudentParticipation> studentParticipations) throws InterruptedException {
+    public ResponseEntity addNewParticipationNotebook(final @RequestParam("StudentParticipation") List<StudentParticipation> studentParticipations) throws InterruptedException {
 
         List<Student>students=new LinkedList<>();
 

@@ -34,9 +34,9 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("SELECT student FROM Student student WHERE student.hostel = :hostel")
     List<Student> findStudentByHostel(@Param("hostel")boolean hostel);
 
-    @Query("SELECT student FROM Student student WHERE LOWER(student.name) LIKE '%'+LOWER(:search)+'%' OR " +
-            "LOWER(student.surname) LIKE '%'+LOWER(:search)+'%' OR " +
-            "((student.patronymicName IS NOT NULL) AND (student.patronymicName LIKE '%'+LOWER(:search)+'%'))")
+    @Query("SELECT student FROM Student student WHERE (LOWER(student.name) LIKE LOWER(CONCAT('%',:search,'%'))) OR " +
+            "(LOWER(student.surname) LIKE LOWER(CONCAT('%',:search,'%'))) OR " +
+            "((student.patronymicName IS NOT NULL) AND (LOWER(student.patronymicName) LIKE LOWER(CONCAT('%',:search,'%'))))")
     List<Student>findStudentsByNameLikeOrSurnameLikeOrPatronymicNameIsNotNullAndPatronymicNameLike(@Param("search")String search);
 
 }

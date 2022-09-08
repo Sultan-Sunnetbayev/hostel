@@ -12,10 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,7 +55,7 @@ public class StudentServiceImpl implements StudentService{
                 .patronymicName(student.getPatronymicName())
                 .trainingYear(student.getTrainingYear())
                 .gender(student.getGender())
-                .hostel(student.getHostel())
+                .hostel(student.getHostel()!=null? student.getHostel() : true)
                 .build();
 
         if(image!=null && !image.isEmpty()){
@@ -220,6 +217,7 @@ public class StudentServiceImpl implements StudentService{
     private StudentDTO toDTO(Student student) {
 
         StudentDTO studentDTO=StudentDTO.builder()
+                .id(student.getId())
                 .name(student.getName())
                 .surname(student.getSurname())
                 .trainingYear(student.getTrainingYear())
@@ -252,11 +250,24 @@ public class StudentServiceImpl implements StudentService{
             students=studentRepository.findStudentsByTrainingYear(trainingYear);
         }
         if(hostel!=null){
-            students.add((Student) studentRepository.findStudentByHostel(hostel));
+            List<Student>temporal=studentRepository.findStudentByHostel(hostel);
+
+            if(temporal!=null){
+                if(students==null){
+                    students=new LinkedList<>();
+                }
+                students.addAll(temporal);
+            }
         }
         if(search!=null && !search.isEmpty()){
-            students.add((Student)studentRepository.findStudentsByNameLikeOrSurnameLikeOrPatronymicNameIsNotNullAndPatronymicNameLike(
+            if(students==null){
+                students=new LinkedList<>();
+            }
+            students.addAll(studentRepository.findStudentsByNameLikeOrSurnameLikeOrPatronymicNameIsNotNullAndPatronymicNameLike(
                     search));
+        }
+        if(students==null){
+            students=new ArrayList<>();
         }
         Collections.sort(students, compareById);
         for(int i=1;i<students.size();i++){

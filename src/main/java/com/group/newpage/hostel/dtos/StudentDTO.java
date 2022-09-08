@@ -23,8 +23,6 @@ public class StudentDTO {
     private Integer trainingYear;
     private Gender gender;
     private Boolean status;
-    private Date created;
-    private Date updated;
 
     @Override
     public String toString() {
@@ -38,8 +36,6 @@ public class StudentDTO {
                 ", trainingYear=" + trainingYear +
                 ", gender=" + gender +
                 ", status=" + status +
-                ", created=" + created +
-                ", updated=" + updated +
                 '}';
     }
 }

@@ -23,7 +23,7 @@ public class DeanFacultyController {
 
     @PostMapping(path = "/add/liable/participation", produces = "application/json")
     public ResponseEntity addLiableParticipation(final @ModelAttribute User liableParticipation,
-                                                 final @RequestParam("image") MultipartFile image){
+                                                 final @RequestParam(value = "image",required = false) MultipartFile image){
 
         Map<String, Object> response=new LinkedHashMap<>();
 
@@ -47,7 +47,7 @@ public class DeanFacultyController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(path = "/remove/liableParticipation/by/id", produces = "application/json")
+    @DeleteMapping(path = "/remove/liableParticipation/by/id", produces = "application/json")
     public ResponseEntity removeLiableParticipationById(final @RequestParam("userId")int userId){
 
         Map<String, Object>response=new LinkedHashMap<>();

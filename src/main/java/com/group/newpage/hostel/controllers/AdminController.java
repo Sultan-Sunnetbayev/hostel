@@ -23,7 +23,7 @@ public class AdminController {
 
     @PostMapping(path = "/add/deanFaculty", produces = "application/json")
     public ResponseEntity addDeanFaculty(final @ModelAttribute User deanFaculty,
-                                         final @RequestParam("image") MultipartFile image){
+                                         final @RequestParam(value = "image",required = false) MultipartFile image){
 
         Map<String,Object> response=new LinkedHashMap<>();
 

@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -37,8 +38,9 @@ public class Student implements Comparable<Student>{
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @Column(name = "training_year")
-    @NotBlank(message = "training year is mandatory")
-    @NotEmpty(message = "training year is empty")
+//    @NotBlank(message = "training year is mandatory")
+//    @NotEmpty(message = "training year is empty")
+    @NotNull(message = "training year is null")
     private Integer trainingYear;
     @Column(name = "hostel")
     private Boolean hostel;
